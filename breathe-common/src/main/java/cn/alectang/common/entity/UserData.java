@@ -1,30 +1,25 @@
 package cn.alectang.common.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author alectang
- * @since 2022-04-06
+ * @since 2022-04-14
  */
 @TableName("t_user_data")
 @ApiModel(value = "UserData对象", description = "")
 public class UserData implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @ApiModelProperty("主键")
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
 
     @ApiModelProperty("用户ID")
     private Long uid;
@@ -45,7 +40,7 @@ public class UserData implements Serializable {
     private Integer sex;
 
     @ApiModelProperty("生日")
-    private LocalDateTime birthday;
+    private LocalDate birthday;
 
     @ApiModelProperty("地址")
     private String location;
@@ -56,19 +51,12 @@ public class UserData implements Serializable {
     @ApiModelProperty("更新时间")
     private LocalDateTime updateTime;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
     public Long getUid() {
         return uid;
     }
 
-    public void setUid(Long userId) {
-        this.uid = userId;
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
     public String getAvatar() {
         return avatar;
@@ -105,11 +93,11 @@ public class UserData implements Serializable {
     public void setSex(Integer sex) {
         this.sex = sex;
     }
-    public LocalDateTime getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDateTime birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
     public String getLocation() {
@@ -137,16 +125,16 @@ public class UserData implements Serializable {
     @Override
     public String toString() {
         return "UserData{" +
-            "id=" + id +
-            ", uid=" + uid +
-            ", avatar=" + avatar +
-            ", nickname=" + nickname +
-            ", description=" + description +
-            ", sex=" + sex +
-            ", birthday=" + birthday +
-            ", location=" + location +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-        "}";
+                "uid=" + uid +
+                ", avatar=" + avatar +
+                ", background=" + background +
+                ", nickname=" + nickname +
+                ", description=" + description +
+                ", sex=" + sex +
+                ", birthday=" + birthday +
+                ", location=" + location +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                "}";
     }
 }

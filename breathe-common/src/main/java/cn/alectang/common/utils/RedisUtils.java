@@ -27,7 +27,7 @@ public class RedisUtils {
      * @param value
      * @return
      */
-    public boolean set(final String key, Object value) {
+    public boolean inset(final String key, Object value) {
         boolean result = false;
         try {
             ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
@@ -170,7 +170,7 @@ public class RedisUtils {
      * @param key
      * @param value
      */
-    public void add(String key, Object value) {
+    public void set(String key, Object value) {
         SetOperations<String, Object> set = redisTemplate.opsForSet();
         set.add(key, value);
     }

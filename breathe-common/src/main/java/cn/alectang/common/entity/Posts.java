@@ -3,74 +3,101 @@ package cn.alectang.common.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
- * @author alectang
- * @since 2022-04-07
+ * @author 作者
+ * @since 2022-04-13
  */
 @TableName("t_posts")
-@ApiModel(value = "Posts对象", description = "")
 public class Posts implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("UUID")
-    private String uudi;
+    /**
+     * UUID
+     */
+    private String uuid;
 
-    @ApiModelProperty("类型(文本/图片/视频等)")
+    /**
+     * 类型(文本/图片/视频等)
+     */
     private Integer postsType;
 
-    @ApiModelProperty("html/md/富文本")
+    /**
+     * html/md/富文本
+     */
     private Integer postsFormat;
 
-    @ApiModelProperty("社区ID")
+    /**
+     * 社区ID
+     */
     private Integer communityId;
 
-    @ApiModelProperty("用户ID")
+    /**
+     * 用户ID
+     */
     private Long uid;
 
-    @ApiModelProperty("帖子状态")
+    /**
+     * 帖子状态
+     */
     private Integer postsStatus;
 
-    @ApiModelProperty("是否置顶")
+    /**
+     * 是否置顶
+     */
     private Integer isTop;
 
-    @ApiModelProperty("创建时间")
+    /**
+     * 创建时间
+     */
     private LocalDateTime createTime;
 
-    @ApiModelProperty("更新时间")
+    /**
+     * 更新时间
+     */
     private LocalDateTime updateTime;
 
-    @ApiModelProperty("是否删除")
+    /**
+     * 是否删除
+     */
     private Integer isDeleted;
 
-    @ApiModelProperty("帖子内容")
+    /**
+     * 帖子内容
+     */
     private String postsContent;
 
-    @ApiModelProperty("帖子图片")
+    /**
+     * 帖子图片
+     */
     private String postsImages;
 
-    @ApiModelProperty("帖子视频")
+    /**
+     * 帖子视频
+     */
     private String postsVideos;
 
-    @ApiModelProperty("视频缩略图")
+    /**
+     * 视频缩略图
+     */
     private String thumbnailImg;
 
-    @ApiModelProperty("帖子音频")
+    /**
+     * 帖子音频
+     */
     private String postsAudio;
 
-    public String getUudi() {
-        return uudi;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setUudi(String uudi) {
-        this.uudi = uudi;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
     public Integer getPostsType() {
         return postsType;
@@ -93,12 +120,12 @@ public class Posts implements Serializable {
     public void setCommunityId(Integer communityId) {
         this.communityId = communityId;
     }
-    public Long getUserId() {
+    public Long getUid() {
         return uid;
     }
 
-    public void setUserId(Long userId) {
-        this.uid = userId;
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
     public Integer getPostsStatus() {
         return postsStatus;
@@ -174,21 +201,21 @@ public class Posts implements Serializable {
     @Override
     public String toString() {
         return "Posts{" +
-            "uudi=" + uudi +
-            ", postsType=" + postsType +
-            ", postsFormat=" + postsFormat +
-            ", communityId=" + communityId +
-            ", uid=" + uid +
-            ", postsStatus=" + postsStatus +
-            ", isTop=" + isTop +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", isDeleted=" + isDeleted +
-            ", postsContent=" + postsContent +
-            ", postsImages=" + postsImages +
-            ", postsVideos=" + postsVideos +
-            ", thumbnailImg=" + thumbnailImg +
-            ", postsAudio=" + postsAudio +
-        "}";
+                "uuid=" + uuid +
+                ", postsType=" + postsType +
+                ", postsFormat=" + postsFormat +
+                ", communityId=" + communityId +
+                ", uid=" + uid +
+                ", postsStatus=" + postsStatus +
+                ", isTop=" + isTop +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", isDeleted=" + isDeleted +
+                ", postsContent=" + postsContent +
+                ", postsImages=" + postsImages +
+                ", postsVideos=" + postsVideos +
+                ", thumbnailImg=" + thumbnailImg +
+                ", postsAudio=" + postsAudio +
+                "}";
     }
 }

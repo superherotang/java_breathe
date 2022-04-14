@@ -1,5 +1,6 @@
 package cn.alectang.user.service;
 
+import cn.alectang.common.entity.UserCount;
 import cn.alectang.common.entity.UserData;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -19,4 +20,6 @@ public interface IUserDataService extends IService<UserData> {
 
 
     void initUser(UserData userData);
+
+    UserCount getUserCountByUid(String uid);
 }

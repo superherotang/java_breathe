@@ -35,7 +35,11 @@ public class PostsController {
     @PostMapping("/release")
     public R release(Posts posts){
         R userInfoByUid = minioFeignService.getUserInfoByUid("3");
+        postsService.release(posts);
         return userInfoByUid;
     }
+
+
+
 
 }
