@@ -1,6 +1,8 @@
 package cn.alectang.user.controller;
 
 import cn.alectang.common.entity.UserCount;
+import cn.alectang.common.entity.UserInfoVo;
+import cn.alectang.common.exceptionhandler.BreatheException;
 import cn.alectang.common.utils.JwtUtils;
 import cn.alectang.common.utils.R;
 import cn.alectang.common.entity.UserData;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -35,7 +38,12 @@ public class UserDataController {
     @GetMapping("/getUserData")
     public R getUserInfoByToken(HttpServletRequest request){
         //调用jwt工具类，获取头部信息，返回用户id
-        String uid = JwtUtils.getMemberIdByJwtToken(request);
+        String uid;
+        try {
+            uid = JwtUtils.getMemberIdByJwtToken(request);
+        }catch (Exception e){
+            throw  new BreatheException(20001,"jwtExpire");
+        }
         //根据uid获得用户信息
         UserData userInfo = userDataService.getUserDataByUid(uid);
         return R.ok().data("userData",userInfo);
@@ -63,6 +71,16 @@ public class UserDataController {
         UserCount userCount=userDataService.getUserCountByUid(uid);
         return R.ok().data("userCount",userCount);
     }
+
+
+
+    @ApiOperation(value = "通过uuid批量获取")
+    @GetMapping("/getUserInfoVo")
+    public List<UserInfoVo> getUserInfoVo(List<Long> uid){
+        userDataService.getUserInfoVo(uid);
+        return null;
+    }
+
 
 
 

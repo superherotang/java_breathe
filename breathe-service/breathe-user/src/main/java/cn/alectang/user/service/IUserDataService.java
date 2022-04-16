@@ -4,6 +4,8 @@ import cn.alectang.common.entity.UserCount;
 import cn.alectang.common.entity.UserData;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -22,4 +24,6 @@ public interface IUserDataService extends IService<UserData> {
     void initUser(UserData userData);
 
     UserCount getUserCountByUid(String uid);
+
+    void getUserInfoVo(List<Long> uid);
 }

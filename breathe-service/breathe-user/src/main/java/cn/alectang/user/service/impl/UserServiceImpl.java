@@ -74,7 +74,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
             UserCount userCount = new UserCount().init();
             String json = JSON.toJSONString(userCount);
-            redisUtils.inset(user.getId()+"c", json);
+            redisUtils.set(user.getId()+"c", json);
 
             UserData userData = new UserData();
             userData.setUid(user.getId());

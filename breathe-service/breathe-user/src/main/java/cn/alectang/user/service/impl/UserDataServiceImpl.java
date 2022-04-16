@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -77,6 +78,12 @@ public class UserDataServiceImpl extends ServiceImpl<UserDataMapper, UserData> i
     public UserCount getUserCountByUid(String uid) {
         UserCount userCount = JSON.parseObject((String) redisUtils.get(uid + "c"), UserCount.class);
         return userCount;
+    }
+
+    @Override
+    public void getUserInfoVo(List<Long> uid) {
+        List<UserData> userInfo = baseMapper.selectBatchIds(uid);
+        System.out.println(userInfo);
     }
 
 
