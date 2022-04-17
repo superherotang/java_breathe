@@ -1,7 +1,7 @@
 package cn.alectang.community.service.impl;
 
 import cn.alectang.common.exceptionhandler.BreatheException;
-import cn.alectang.common.entity.CommunityPersonnel;
+import cn.alectang.community.entity.CommunityPersonnel;
 import cn.alectang.community.mapper.CommunityPersonnelMapper;
 import cn.alectang.community.service.ICommunityPersonnelService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

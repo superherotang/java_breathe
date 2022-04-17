@@ -1,11 +1,12 @@
 package cn.alectang.user.service.impl;
 
-import cn.alectang.common.entity.UserCount;
 import cn.alectang.common.exceptionhandler.BreatheException;
-import cn.alectang.common.entity.UserData;
 import cn.alectang.common.utils.RedisUtils;
+import cn.alectang.user.entity.UserCount;
+import cn.alectang.user.entity.UserData;
 import cn.alectang.user.mapper.UserDataMapper;
 import cn.alectang.user.service.IUserDataService;
+import cn.alectang.user.vo.UserInfoVo;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -85,6 +86,8 @@ public class UserDataServiceImpl extends ServiceImpl<UserDataMapper, UserData> i
         List<UserData> userInfo = baseMapper.selectBatchIds(uid);
         System.out.println(userInfo);
     }
+
+
 
 
 }

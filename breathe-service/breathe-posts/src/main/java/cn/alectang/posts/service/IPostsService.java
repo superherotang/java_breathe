@@ -1,10 +1,10 @@
 package cn.alectang.posts.service;
 
-import cn.alectang.common.entity.Posts;
-import cn.alectang.common.entity.PostsCount;
-import cn.alectang.common.entity.PostsInfo;
+
+import cn.alectang.posts.entity.Posts;
+import cn.alectang.posts.entity.PostsCount;
+import cn.alectang.posts.vo.PostsInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -21,9 +21,6 @@ public interface IPostsService extends IService<Posts> {
 
     void release(Posts posts);
 
-    List<Posts> getAllPosts(int current, int size);
+    Map<String, Object> getPostInfoPage(long uid, int current);
 
-    PostsCount getPostsCount(String uuid);
-
-    List<PostsInfo> getUserPosts(int uid, int current, int i);
 }

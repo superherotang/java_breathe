@@ -7,10 +7,10 @@
         <artifactId>breathe</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>common</artifactId>
+    <artifactId>breathe-common</artifactId>
     <packaging>pom</packaging>
-    <name>common</name>
-    <description>common</description>
+    <name>breathe-common</name>
+    <description>breathe-common</description>
 
 
 
@@ -122,8 +122,12 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.80</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>cn.alectang</groupId>
+            <artifactId>breathe-posts-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
 
     </dependencies>

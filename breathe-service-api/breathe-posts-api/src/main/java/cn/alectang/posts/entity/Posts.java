@@ -1,4 +1,4 @@
-package cn.alectang.common.entity;
+package cn.alectang.posts.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
@@ -35,7 +35,7 @@ public class Posts implements Serializable {
     /**
      * 社区ID
      */
-    private Integer communityId;
+    private Long communityId;
 
     /**
      * 用户ID
@@ -113,11 +113,11 @@ public class Posts implements Serializable {
     public void setPostsFormat(Integer postsFormat) {
         this.postsFormat = postsFormat;
     }
-    public Integer getCommunityId() {
+    public Long getCommunityId() {
         return communityId;
     }
 
-    public void setCommunityId(Integer communityId) {
+    public void setCommunityId(Long communityId) {
         this.communityId = communityId;
     }
     public Long getUid() {

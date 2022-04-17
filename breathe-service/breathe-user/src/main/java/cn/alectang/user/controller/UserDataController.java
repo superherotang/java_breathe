@@ -1,12 +1,12 @@
 package cn.alectang.user.controller;
 
-import cn.alectang.common.entity.UserCount;
-import cn.alectang.common.entity.UserInfoVo;
 import cn.alectang.common.exceptionhandler.BreatheException;
 import cn.alectang.common.utils.JwtUtils;
 import cn.alectang.common.utils.R;
-import cn.alectang.common.entity.UserData;
+import cn.alectang.user.entity.UserCount;
+import cn.alectang.user.entity.UserData;
 import cn.alectang.user.service.IUserDataService;
+import cn.alectang.user.vo.UserInfoVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;

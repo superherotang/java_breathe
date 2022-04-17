@@ -1,7 +1,7 @@
 package cn.alectang.user.service;
 
 import cn.alectang.common.entity.LoginState;
-import cn.alectang.common.entity.User;
+import cn.alectang.user.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

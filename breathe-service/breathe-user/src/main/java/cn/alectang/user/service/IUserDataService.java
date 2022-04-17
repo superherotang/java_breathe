@@ -1,7 +1,8 @@
 package cn.alectang.user.service;
 
-import cn.alectang.common.entity.UserCount;
-import cn.alectang.common.entity.UserData;
+import cn.alectang.user.entity.UserCount;
+import cn.alectang.user.entity.UserData;
+import cn.alectang.user.vo.UserInfoVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -26,4 +27,5 @@ public interface IUserDataService extends IService<UserData> {
     UserCount getUserCountByUid(String uid);
 
     void getUserInfoVo(List<Long> uid);
+
 }

@@ -1,6 +1,6 @@
 package cn.alectang.community.service;
 
-import cn.alectang.common.entity.CommunityPersonnel;
+import cn.alectang.community.entity.CommunityPersonnel;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

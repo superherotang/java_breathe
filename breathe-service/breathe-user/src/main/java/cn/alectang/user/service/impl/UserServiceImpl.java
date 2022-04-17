@@ -1,14 +1,14 @@
 package cn.alectang.user.service.impl;
 
-import cn.alectang.common.entity.UserCount;
 import cn.alectang.common.exceptionhandler.BreatheException;
 import cn.alectang.common.utils.BCryptUtils;
 import cn.alectang.common.utils.JwtUtils;
 import cn.alectang.common.utils.RedisUtils;
 import cn.alectang.common.utils.VerifyUtils;
 import cn.alectang.common.entity.LoginState;
-import cn.alectang.common.entity.User;
-import cn.alectang.common.entity.UserData;
+import cn.alectang.user.entity.User;
+import cn.alectang.user.entity.UserCount;
+import cn.alectang.user.entity.UserData;
 import cn.alectang.user.mapper.UserMapper;
 import cn.alectang.user.service.IUserDataService;
 import cn.alectang.user.service.IUserService;

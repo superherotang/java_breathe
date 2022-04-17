@@ -1,7 +1,7 @@
 package cn.alectang.community.controller;
 
 import cn.alectang.common.utils.R;
-import cn.alectang.common.entity.CommunityPersonnel;
+import cn.alectang.community.entity.CommunityPersonnel;
 import cn.alectang.community.service.ICommunityPersonnelService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

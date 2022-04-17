@@ -1,6 +1,6 @@
 package cn.alectang.user.mapper;
 
-import cn.alectang.common.entity.UserData;
+import cn.alectang.user.entity.UserData;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

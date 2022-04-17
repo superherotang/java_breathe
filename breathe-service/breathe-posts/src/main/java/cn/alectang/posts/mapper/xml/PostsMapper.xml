@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.alectang.posts.mapper.PostsMapper">
 
+    <!--    Page<PostsInfo> selectPostInfoPage(@Param("page") Page<PostsInfo> page,@Param("uid")  Long uid);-->
+    <select id="selectPostInfoPage" resultType="cn.alectang.posts.vo.PostsInfo">
+        SELECT p.*, u.nickname, u.avatar, co.community_name
+        FROM t_posts p
+                 LEFT JOIN t_user_data u on p.uid = u.uid
+                 LEFT JOIN t_community co on p.community_id = co.id
+        WHERE p.uid = ${uid}
+        ORDER BY p.create_time DESC
+    </select>
 </mapper>

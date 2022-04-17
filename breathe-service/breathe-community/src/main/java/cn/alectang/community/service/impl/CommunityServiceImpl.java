@@ -1,8 +1,8 @@
 package cn.alectang.community.service.impl;
 
 import cn.alectang.common.exceptionhandler.BreatheException;
-import cn.alectang.common.entity.Community;
-import cn.alectang.common.entity.CommunityPersonnel;
+import cn.alectang.community.entity.Community;
+import cn.alectang.community.entity.CommunityPersonnel;
 import cn.alectang.community.mapper.CommunityMapper;
 import cn.alectang.community.service.ICommunityPersonnelService;
 import cn.alectang.community.service.ICommunityService;

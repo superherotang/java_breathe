@@ -1,6 +1,6 @@
 package cn.alectang.community.mapper;
 
-import cn.alectang.common.entity.Community;
+import cn.alectang.community.entity.Community;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

@@ -1,4 +1,4 @@
-package cn.alectang.common.entity;
+package cn.alectang.user.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
