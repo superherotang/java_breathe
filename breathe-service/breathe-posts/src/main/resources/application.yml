@@ -33,3 +33,5 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath:cn/alectang/posts/mapper/xml/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

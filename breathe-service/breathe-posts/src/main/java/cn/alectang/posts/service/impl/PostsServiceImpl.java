@@ -52,9 +52,9 @@ public class PostsServiceImpl extends ServiceImpl<PostsMapper, Posts> implements
      * @return
      */
     @Override
-    public Map<String, Object> getPostInfoPage(long uid,int c) {
+    public Map<String, Object> getPostInfoPage(String uid,String type,int c) {
         Page<PostsInfo> page = new Page<>(c, 10);
-        baseMapper.selectPostInfoPage(page, uid);
+        baseMapper.selectPostInfoPage(page, String.valueOf(uid),type);
         List<PostsInfo> postsInfoList = page.getRecords();
         long current = page.getCurrent();
         long pages = page.getPages();
@@ -92,19 +92,6 @@ public class PostsServiceImpl extends ServiceImpl<PostsMapper, Posts> implements
     }
 
 
-//
-//    @Override
-//    public List<Posts> getAllPosts(int current, int size) {
-//        QueryWrapper<Posts> queryWrapper = new QueryWrapper<>();
-//        queryWrapper.select().orderByDesc("create_time");
-//        final Page<Posts> mpPage = baseMapper.selectPage(new Page<>(current, size), Wrappers.<Posts>query().select().orderByDesc("create_time"));
-//        System.out.println("总页数 " + mpPage.getPages());
-//        System.out.println("总记录数 " + mpPage.getTotal());
-//        final List<Posts> userList = mpPage.getRecords();
-//        userList.forEach(System.out::println);
-//
-//        return userList;
-//    }
 
 
 }

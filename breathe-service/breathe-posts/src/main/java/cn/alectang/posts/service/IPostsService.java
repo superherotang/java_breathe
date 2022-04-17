@@ -21,6 +21,6 @@ public interface IPostsService extends IService<Posts> {
 
     void release(Posts posts);
 
-    Map<String, Object> getPostInfoPage(long uid, int current);
+    Map<String, Object> getPostInfoPage(String uid,String type, int current);
 
 }

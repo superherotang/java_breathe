@@ -3,13 +3,11 @@ package cn.alectang.posts.controller;
 import cn.alectang.common.utils.R;
 import cn.alectang.posts.entity.Posts;
 import cn.alectang.posts.service.IPostsService;
-import cn.alectang.posts.vo.PostsInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,10 +34,12 @@ public class PostsController {
         return R.ok();
     }
 
-    @ApiOperation("根据UID获取帖子所有信息")
-    @GetMapping("/getPostInfoPage/{uid}/{current}")
-    public R getPostInfoPage(@PathVariable(name = "uid") long uid,@PathVariable(name = "current") int current){
-        Map<String, Object> postsInfoPage= postsService.getPostInfoPage(uid,current);
+    @ApiOperation("根据UID或者类型获取帖子所有信息")
+    @PostMapping("/getPostInfoPage")
+    public R getPostInfoPage(@RequestParam(name = "uid",required = false) String uid,@RequestParam(name = "type",required = false) String type,@RequestParam(name = "current") int current){
+        System.out.println(uid);
+        System.out.println(type);
+        Map<String, Object> postsInfoPage= postsService.getPostInfoPage(String.valueOf(uid),String.valueOf(type),current);
         return R.ok().data(postsInfoPage);
     }
 
