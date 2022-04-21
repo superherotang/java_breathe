@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.alectang.posts.mapper.CommentMapper">
+
+
+    <select id="getCommentByPid" resultType="cn.alectang.posts.vo.CommentInfo">
+        select c.uuid, c.content, c.`like`, c.create_time, ud.nickname, ud.avatar
+        from t_comment c
+                 LEFT JOIN t_user_data ud ON c.uid = ud.uid
+        WHERE c.posts_id = '${pid}'
+          AND is_deleted = 0
+        ORDER BY create_time DESC
+    </select>
+</mapper>
