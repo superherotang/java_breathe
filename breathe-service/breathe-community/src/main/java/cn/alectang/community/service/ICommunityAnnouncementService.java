@@ -1,7 +1,10 @@
 package cn.alectang.community.service;
 
+import cn.alectang.community.vo.CommunityAnnouncementSimple;
 import cn.alectang.community.entity.CommunityAnnouncement;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ICommunityAnnouncementService extends IService<CommunityAnnouncement> {
 
+    List<CommunityAnnouncementSimple> getCommunityAnnouncement(String cid);
 }

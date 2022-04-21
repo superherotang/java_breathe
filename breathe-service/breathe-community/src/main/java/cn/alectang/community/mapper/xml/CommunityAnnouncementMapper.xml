@@ -2,4 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.alectang.community.mapper.CommunityAnnouncementMapper">
 
+    <select id="getCommunityAnnouncement" resultType="cn.alectang.community.vo.CommunityAnnouncementSimple">
+        SELECT ca.content_type, posts_content
+        FROM t_community_announcement ca
+                 LEFT JOIN t_posts p on ca.posts_id = p.uuid
+        WHERE ca.community_id = ${cid}
+          AND ca.is_deleted = 0
+        ORDER BY ca.update_time DESC, ca.content_type DESC
+    </select>
 </mapper>

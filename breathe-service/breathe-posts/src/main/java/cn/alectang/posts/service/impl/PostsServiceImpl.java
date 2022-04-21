@@ -52,9 +52,9 @@ public class PostsServiceImpl extends ServiceImpl<PostsMapper, Posts> implements
      * @return
      */
     @Override
-    public Map<String, Object> getPostInfoPage(String uid,String type,int c) {
+    public Map<String, Object> getPostInfoPage(List<String> uid,List<String> cid,String type,int c) {
         Page<PostsInfo> page = new Page<>(c, 10);
-        baseMapper.selectPostInfoPage(page, String.valueOf(uid),type);
+        baseMapper.selectPostInfoPage(page, uid,cid,type);
         List<PostsInfo> postsInfoList = page.getRecords();
         long current = page.getCurrent();
         long pages = page.getPages();

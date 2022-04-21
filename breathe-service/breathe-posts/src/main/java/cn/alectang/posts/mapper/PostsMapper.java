@@ -22,5 +22,5 @@ import java.util.List;
 public interface PostsMapper extends BaseMapper<Posts> {
 
    // @Select("SELECT p.*,u.nickname,u.avatar FROM t_posts p LEFT JOIN t_user_data u on p.uid=u.uid WHERE p.uid=11 ORDER BY p.create_time DESC ")
-    Page<PostsInfo> selectPostInfoPage(@Param("page") Page<PostsInfo> page,@Param("uid")  String uid,@Param("postsType")  String postsType);
+    Page<PostsInfo> selectPostInfoPage(@Param("page") Page<PostsInfo> page,@Param("uid")  List<String> uid,@Param("cid")  List<String> cid,@Param("postsType")  String postsType);
 }

@@ -1,8 +1,12 @@
 package cn.alectang.community.mapper;
 
+import cn.alectang.community.vo.CommunityAnnouncementSimple;
 import cn.alectang.community.entity.CommunityAnnouncement;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +18,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface CommunityAnnouncementMapper extends BaseMapper<CommunityAnnouncement> {
-
+    List<CommunityAnnouncementSimple> getCommunityAnnouncement(@Param("cid") String cid);
 }

@@ -3,6 +3,8 @@ package cn.alectang.community.service;
 import cn.alectang.community.entity.Community;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.Map;
+
 /**
  * <p>
  *  服务类
@@ -13,7 +15,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ICommunityService extends IService<Community> {
 
-    void createCommunity(Community community);
+    String createCommunity(Community community);
 
     void updateDescription(String id, String description);
+
+    Map<String,Object> getCommunityInfo(long id);
 }

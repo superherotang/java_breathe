@@ -29,6 +29,9 @@ public class Community implements Serializable {
     @ApiModelProperty("社区名称")
     private String communityName;
 
+    @ApiModelProperty("头像")
+    private String avatar;
+
     @ApiModelProperty("社区简介")
     private String description;
 
@@ -49,6 +52,14 @@ public class Community implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public void setId(Long id) {
@@ -107,14 +118,15 @@ public class Community implements Serializable {
     @Override
     public String toString() {
         return "Community{" +
-            "id=" + id +
-            ", communityName=" + communityName +
-            ", description=" + description +
-            ", location=" + location +
-            ", founder=" + founder +
-            ", administrator=" + administrator +
-            ", status=" + status +
-            ", createdTime=" + createdTime +
-        "}";
+                "id=" + id +
+                ", communityName='" + communityName + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", founder=" + founder +
+                ", administrator=" + administrator +
+                ", status=" + status +
+                ", createdTime=" + createdTime +
+                '}';
     }
 }

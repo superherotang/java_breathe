@@ -16,3 +16,8 @@ spring:
   cloud:
     nacos:
       server-addr: 192.168.10.150:8848
+
+mybatis-plus:
+  mapper-locations: classpath:cn/alectang/community/mapper/xml/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

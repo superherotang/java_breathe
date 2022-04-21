@@ -6,6 +6,7 @@ import cn.alectang.user.vo.UserInfoVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -26,6 +27,6 @@ public interface IUserDataService extends IService<UserData> {
 
     UserCount getUserCountByUid(String uid);
 
-    void getUserInfoVo(List<Long> uid);
 
+    Map<String,Object> getUserNameByUid(Long uid);
 }

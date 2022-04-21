@@ -14,7 +14,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -81,13 +83,20 @@ public class UserDataServiceImpl extends ServiceImpl<UserDataMapper, UserData> i
         return userCount;
     }
 
+
     @Override
-    public void getUserInfoVo(List<Long> uid) {
-        List<UserData> userInfo = baseMapper.selectBatchIds(uid);
-        System.out.println(userInfo);
+    public Map<String,Object> getUserNameByUid(Long uid) {
+        QueryWrapper<UserData> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("uid", uid);
+        UserData userData = baseMapper.selectOne(queryWrapper);
+        Map<String,Object> map= new HashMap<>();
+        map.put("cAdmin",userData.getNickname());
+        map.put("cAvatar",userData.getAvatar());
+        if (userData==null){
+            throw new BreatheException(20001,"找不到该用户");
+        }
+        return map;
     }
-
-
 
 
 }

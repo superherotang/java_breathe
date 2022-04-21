@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 
 @Api(tags = "社区人员接口")
 @RestController
-@RequestMapping("/community/communityPersonnel")
+@RequestMapping("/communityPersonnel")
 public class CommunityPersonnelController {
 
     @Resource

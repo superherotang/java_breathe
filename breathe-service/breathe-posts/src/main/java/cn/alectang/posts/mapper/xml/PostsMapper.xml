@@ -2,47 +2,58 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.alectang.posts.mapper.PostsMapper">
 
-    <!--    Page<PostsInfo> selectPostInfoPage(@Param("page") Page<PostsInfo> page,@Param("uid")  Long uid);-->
+    <!--   Page<PostsInfo> selectPostInfoPage(@Param("page") Page<PostsInfo> page,@Param("uid")  Long uid);-->
     <select id="selectPostInfoPage" resultType="cn.alectang.posts.vo.PostsInfo">
         SELECT p.*, u.nickname, u.avatar, co.community_name
         FROM t_posts p
         LEFT JOIN t_user_data u on p.uid = u.uid
         LEFT JOIN t_community co on p.community_id = co.id
-        where 1=1
-        <choose>
-            <when test="postsType==1">
-                and posts_type=1
-            </when>
-            <when test="postsType==2">
-                and posts_type=2
-            </when>
-            <when test="postsType==3">
-                and posts_type=3
-            </when>
-            <when test="postsType==4">
-                and posts_type=4
-            </when>
-            <otherwise>
-                and 1=1
-            </otherwise>
-        </choose>
-        <choose>
-            <when test="uid!=null and uid!=''">
-                and 1=1
-            </when>
-            <otherwise>
-                and posts_status=1
-            </otherwise>
-        </choose>
-        <if test="uid!=null and uid!=''">
-            and p.uid = ${uid}
-        </if>
-        and p.is_deleted=0
-        ORDER BY
-        <if test="uid!=null and uid!=''">
-            p.is_top DESC,
-        </if>
-        p.create_time DESC
-
+        <where>
+            <choose>
+                <when test="postsType==1">
+                    and posts_type=1 or posts_type=2
+                </when>
+                <when test="postsType==2">
+                    and posts_type=1 or posts_type=2
+                </when>
+                <when test="postsType==3">
+                    and posts_type=3
+                </when>
+                <when test="postsType==4">
+                    and posts_type=4
+                </when>
+                <otherwise>
+                    and 1=1
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="uid!=null and uid!=''">
+                    and 1=1
+                </when>
+                <otherwise>
+                    and posts_status=1
+                </otherwise>
+            </choose>
+            <if test="uid!=null and uid!=''">
+                <foreach collection="uid" item="item" open="and p.uid=" separator="or p.uid=" close=" ">
+                    ${item}
+                </foreach>
+            </if>
+            <if test="cid!=null and cid!=''">
+                <foreach collection="cid" item="item" open="and co.id=" separator="or co.id=" close=" ">
+                    ${item}
+                </foreach>
+            </if>
+            and p.is_deleted=0
+            and p.other=0
+            ORDER BY
+            <if test="uid!=null and uid!=''">
+                p.is_top DESC,
+            </if>
+            p.create_time DESC
+        </where>
     </select>
 </mapper>
+        <!--  and p.uid = ${uid}-->
+
+        <!--        and co.id = ${cid}-->

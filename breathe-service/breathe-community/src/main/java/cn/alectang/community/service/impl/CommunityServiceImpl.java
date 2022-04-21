@@ -3,6 +3,7 @@ package cn.alectang.community.service.impl;
 import cn.alectang.common.exceptionhandler.BreatheException;
 import cn.alectang.community.entity.Community;
 import cn.alectang.community.entity.CommunityPersonnel;
+import cn.alectang.community.feign.UserDataService;
 import cn.alectang.community.mapper.CommunityMapper;
 import cn.alectang.community.service.ICommunityPersonnelService;
 import cn.alectang.community.service.ICommunityService;
@@ -12,6 +13,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -28,13 +32,18 @@ public class CommunityServiceImpl extends ServiceImpl<CommunityMapper, Community
     ICommunityPersonnelService communityPersonnelService;
 
 
+
+    @Resource
+    private UserDataService userDataService;
+
+
     /**
      * 创建社区
      *
      * @param community
      */
     @Override
-    public void createCommunity(Community community) {
+    public String createCommunity(Community community) {
         QueryWrapper<Community> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("community_name", community.getCommunityName());
         //判断是否有该社区
@@ -55,6 +64,8 @@ public class CommunityServiceImpl extends ServiceImpl<CommunityMapper, Community
         communityPersonnel.setUserType(0);
         //添加社区人员
         communityPersonnelService.addCommunity(communityPersonnel);
+
+        return getCommunity.getId().toString();
     }
 
     /**
@@ -68,5 +79,29 @@ public class CommunityServiceImpl extends ServiceImpl<CommunityMapper, Community
         updateWrapper.eq("id", id);
         updateWrapper.set("description", description);
         baseMapper.update(null, updateWrapper);
+    }
+
+    @Override
+    public  Map<String,Object>  getCommunityInfo(long id) {
+        QueryWrapper<Community> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",id);
+        queryWrapper.eq("status",1);
+        Community community = baseMapper.selectOne(queryWrapper);
+        Map<String,Object> map = userDataService.getUserName(community.getAdministrator());
+        Map<String, Object> mapa = new HashMap<String, Object>();
+        try {
+
+            Field[] declaredFields = community.getClass().getDeclaredFields();
+            for (Field field : declaredFields) {
+                field.setAccessible(true);
+                map.put(field.getName(), field.get(community));
+            }
+        }catch (Exception e){
+            throw new BreatheException(20001,"内部异常");
+        }
+
+        map.putAll(mapa);
+
+        return map;
     }
 }

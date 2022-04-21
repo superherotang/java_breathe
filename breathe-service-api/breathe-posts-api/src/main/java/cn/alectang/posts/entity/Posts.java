@@ -92,6 +92,11 @@ public class Posts implements Serializable {
      */
     private String postsAudio;
 
+    /**
+     * 其他
+     */
+    private Integer other;
+
     public String getUuid() {
         return uuid;
     }
@@ -198,10 +203,18 @@ public class Posts implements Serializable {
         this.postsAudio = postsAudio;
     }
 
+    public Integer getOther() {
+        return other;
+    }
+
+    public void setOther(Integer other) {
+        this.other = other;
+    }
+
     @Override
     public String toString() {
         return "Posts{" +
-                "uuid=" + uuid +
+                "uuid='" + uuid + '\'' +
                 ", postsType=" + postsType +
                 ", postsFormat=" + postsFormat +
                 ", communityId=" + communityId +
@@ -211,11 +224,12 @@ public class Posts implements Serializable {
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", isDeleted=" + isDeleted +
-                ", postsContent=" + postsContent +
-                ", postsImages=" + postsImages +
-                ", postsVideos=" + postsVideos +
-                ", thumbnailImg=" + thumbnailImg +
-                ", postsAudio=" + postsAudio +
-                "}";
+                ", postsContent='" + postsContent + '\'' +
+                ", postsImages='" + postsImages + '\'' +
+                ", postsVideos='" + postsVideos + '\'' +
+                ", thumbnailImg='" + thumbnailImg + '\'' +
+                ", postsAudio='" + postsAudio + '\'' +
+                ", other=" + other +
+                '}';
     }
 }

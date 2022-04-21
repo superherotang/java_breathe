@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -74,15 +75,12 @@ public class UserDataController {
 
 
 
-    @ApiOperation(value = "通过uuid批量获取")
-    @GetMapping("/getUserInfoVo")
-    public List<UserInfoVo> getUserInfoVo(List<Long> uid){
-        userDataService.getUserInfoVo(uid);
-        return null;
+    @ApiOperation(value = "远程调用获取name")
+    @GetMapping( "/getUserName/{uid}")
+    Map<String,Object> getUserName(@PathVariable("uid") Long uid) {
+
+        return userDataService.getUserNameByUid(uid);
     }
-
-
-
 
 
 }
