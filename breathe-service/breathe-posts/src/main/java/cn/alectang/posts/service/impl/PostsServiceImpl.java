@@ -52,9 +52,9 @@ public class PostsServiceImpl extends ServiceImpl<PostsMapper, Posts> implements
      * @return
      */
     @Override
-    public Map<String, Object> getPostInfoPage(List<String> uid,List<String> cid,String type,int c) {
+    public Map<String, Object> getPostInfoPage(List<String> uid, List<String> cid, String type, int c) {
         Page<PostsInfo> page = new Page<>(c, 10);
-        baseMapper.selectPostInfoPage(page, uid,cid,type);
+        baseMapper.selectPostInfoPage(page, uid, cid, type);
         List<PostsInfo> postsInfoList = page.getRecords();
         long current = page.getCurrent();
         long pages = page.getPages();
@@ -62,22 +62,22 @@ public class PostsServiceImpl extends ServiceImpl<PostsMapper, Posts> implements
         long total = page.getTotal();
 
         //获取uuid
-        Collection<String> keys=new ArrayList<>();
-        for(PostsInfo postsInfo:postsInfoList){
+        Collection<String> keys = new ArrayList<>();
+        for (PostsInfo postsInfo : postsInfoList) {
             keys.add(postsInfo.getUuid());
         }
 
         //获取列表
-        List<String> countList=redisUtils.multiGet(keys);
+        List<String> countList = redisUtils.multiGet(keys);
 
         for (int i = 0; i < postsInfoList.size(); i++) {
-            PostsCount postsCount=JSON.parseObject(countList.get(i),PostsCount.class);
-            PostsInfo postsInfo=postsInfoList.get(i);
+            PostsCount postsCount = JSON.parseObject(countList.get(i), PostsCount.class);
+            PostsInfo postsInfo = postsInfoList.get(i);
             postsInfo.setLike(postsCount.getLike());
             postsInfo.setComment(postsCount.getComment());
             postsInfo.setShare(postsCount.getShare());
 
-            postsInfoList.set(i,postsInfo);
+            postsInfoList.set(i, postsInfo);
         }
 
 
@@ -91,7 +91,13 @@ public class PostsServiceImpl extends ServiceImpl<PostsMapper, Posts> implements
         return map;
     }
 
-
+    @Override
+    public void postLike(String pid) {
+        String str = (String) redisUtils.get(pid);
+        PostsCount postsCount = JSON.parseObject(str, PostsCount.class);
+        postsCount.setLike(postsCount.getLike() + 1);
+        redisUtils.set(pid,JSON.toJSONString(postsCount));
+    }
 
 
 }

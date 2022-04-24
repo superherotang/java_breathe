@@ -46,4 +46,14 @@ public class PostsController {
         return R.ok().data(postsInfoPage);
     }
 
+
+    @ApiOperation("根据UID或者类型和社区获取帖子所有信息")
+    @GetMapping("/postLike/{pid}")
+    public R postLike(@PathVariable("pid") String pid){
+        postsService.postLike(pid);
+        return R.ok();
+    }
+
+
+
 }

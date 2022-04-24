@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.InputStream;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -71,7 +72,7 @@ public class MinioServiceImpl implements MinioService {
     public String putObject(MultipartFile file, String bucketName) {
         String fileType = FileTypeUtils.getFileType(file);
         if (fileType == null) {
-            throw new BreatheException(20001,"不支持的文件格式。请确认格式,重新上传！！！");
+            throw new BreatheException(20001, "不支持的文件格式。请确认格式,重新上传！！！");
         }
         try {
             bucketName = StringUtils.isNotBlank(bucketName) ? bucketName : minioProperties.getBucketName();
@@ -82,16 +83,65 @@ public class MinioServiceImpl implements MinioService {
 
             String objectName = UUID.randomUUID().toString().replaceAll("-", "")
                     + fileName.substring(fileName.lastIndexOf("."));
-            minioUtil.putObject(bucketName, file, objectName,fileType);
-            return minioProperties.getEndpoint()+"/"+bucketName+"/"+objectName;
+            minioUtil.putObject(bucketName, file, objectName, fileType);
+            return minioProperties.getEndpoint() + "/" + bucketName + "/" + objectName;
         } catch (Exception e) {
-            throw new BreatheException(20001,"上传失败");
+            throw new BreatheException(20001, "上传失败");
         }
     }
 
     @Override
+    public String putListObject(MultipartFile file, MultipartFile[] files, String bucketName) {
+        if (file!=null) {
+            String fileType = FileTypeUtils.getFileType(file);
+            if (fileType == null) {
+                throw new BreatheException(20001, "不支持的文件格式。请确认格式,重新上传！！！");
+            }
+            try {
+                bucketName = StringUtils.isNotBlank(bucketName) ? bucketName : minioProperties.getBucketName();
+                if (!this.bucketExists(bucketName)) {
+                    this.makeBucket(bucketName);
+                }
+                String fileName = file.getOriginalFilename();
+
+                String objectName = UUID.randomUUID().toString().replaceAll("-", "")
+                        + fileName.substring(fileName.lastIndexOf("."));
+                minioUtil.putObject(bucketName, file, objectName, fileType);
+                return minioProperties.getEndpoint() + "/" + bucketName + "/" + objectName;
+            } catch (Exception e) {
+                throw new BreatheException(20001, "上传失败");
+            }
+        }
+        if (files.length > 0) {
+            List<String> srcList = new LinkedList<>();
+            for (MultipartFile flagFile : files) {
+                String fileType = FileTypeUtils.getFileType(flagFile);
+                if (fileType == null) {
+                    throw new BreatheException(20001, "不支持的文件格式。请确认格式,重新上传！！！");
+                }
+                try {
+                    bucketName = StringUtils.isNotBlank(bucketName) ? bucketName : minioProperties.getBucketName();
+                    if (!this.bucketExists(bucketName)) {
+                        this.makeBucket(bucketName);
+                    }
+                    String fileName = flagFile.getOriginalFilename();
+
+                    String objectName = UUID.randomUUID().toString().replaceAll("-", "")
+                            + fileName.substring(fileName.lastIndexOf("."));
+                    minioUtil.putObject(bucketName, flagFile, objectName, fileType);
+                    srcList.add(minioProperties.getEndpoint() + "/" + bucketName + "/" + objectName);
+                } catch (Exception e) {
+                    throw new BreatheException(20001, "上传失败");
+                }
+            }
+            return String.join(",", srcList);
+        }
+        return null;
+    }
+
+    @Override
     public InputStream downloadObject(String bucketName, String objectName) {
-        return minioUtil.getObject(bucketName,objectName);
+        return minioUtil.getObject(bucketName, objectName);
     }
 
     @Override
@@ -101,11 +151,11 @@ public class MinioServiceImpl implements MinioService {
 
     @Override
     public boolean removeListObject(String bucketName, List<String> objectNameList) {
-        return minioUtil.removeObject(bucketName,objectNameList);
+        return minioUtil.removeObject(bucketName, objectNameList);
     }
 
     @Override
-    public String getObjectUrl(String bucketName,String objectName) {
+    public String getObjectUrl(String bucketName, String objectName) {
         return minioUtil.getObjectUrl(bucketName, objectName);
     }
 }

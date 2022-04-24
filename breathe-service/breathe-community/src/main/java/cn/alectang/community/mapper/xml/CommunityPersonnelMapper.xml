@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.alectang.community.mapper.CommunityPersonnelMapper">
+    <select id="getMyComment" resultType="cn.alectang.community.vo.MyComment">
+        SELECT c.id,c.community_name,c.avatar
+        FROM t_community_personnel cp
+                 LEFT JOIN t_community c ON cp.community_id = c.id
+        WHERE cp.uid = ${uid}
 
+    </select>
 </mapper>

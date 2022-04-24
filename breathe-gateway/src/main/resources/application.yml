@@ -1,0 +1,39 @@
+server:
+  port: 7000
+
+spring:
+  application:
+    name: breathe-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.10.150:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: user
+          uri: lb://breathe-user
+          predicates:
+            - Path=/breatheUser/**
+          filters:
+            - StripPrefix=1
+        - id: posts
+          uri: lb://breathe-posts
+          predicates:
+            - Path=/breathePosts/**
+          filters:
+            - StripPrefix=1
+        - id: community
+          uri: lb://breathe-community
+          predicates:
+            - Path=/breatheCommunity/**
+          filters:
+            - StripPrefix=1
+        - id: minio
+          uri: lb://breathe-minio
+          predicates:
+            - Path=/breatheMinio/**
+          filters:
+            - StripPrefix=1

@@ -7,14 +7,17 @@ import cn.alectang.community.feign.UserDataService;
 import cn.alectang.community.mapper.CommunityMapper;
 import cn.alectang.community.service.ICommunityPersonnelService;
 import cn.alectang.community.service.ICommunityService;
+import cn.alectang.posts.vo.PostsInfo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -102,6 +105,32 @@ public class CommunityServiceImpl extends ServiceImpl<CommunityMapper, Community
 
         map.putAll(mapa);
 
+        return map;
+    }
+
+
+    /***
+     * 获取社区列表
+     * @param c
+     * @return
+     */
+    @Override
+    public Map<String, Object> getCommunityList(int c) {
+        Page<Community> page = new Page<>(c, 10);
+        QueryWrapper<Community> queryWrapper = new QueryWrapper<>();
+        baseMapper.selectPage(page,queryWrapper);
+        HashMap<String, Object> map = new HashMap<>();
+        List<Community> communityList = page.getRecords();
+        long current = page.getCurrent();
+        long pages = page.getPages();
+        long size = page.getSize();
+        long total = page.getTotal();
+
+        map.put("items", communityList);
+        map.put("current", current);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
         return map;
     }
 }

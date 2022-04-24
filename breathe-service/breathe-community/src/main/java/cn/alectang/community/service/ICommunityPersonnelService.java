@@ -1,7 +1,10 @@
 package cn.alectang.community.service;
 
 import cn.alectang.community.entity.CommunityPersonnel;
+import cn.alectang.community.vo.MyComment;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -18,4 +21,6 @@ public interface ICommunityPersonnelService extends IService<CommunityPersonnel>
     void updateAdmin(CommunityPersonnel communityPersonnel,Long admin);
 
     void outCommunity(Long cid, Long uid);
+
+    List<MyComment> getCommunityByUid(String uid);
 }

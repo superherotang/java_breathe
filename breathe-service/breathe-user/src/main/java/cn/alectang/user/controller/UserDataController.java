@@ -6,6 +6,7 @@ import cn.alectang.common.utils.R;
 import cn.alectang.user.entity.UserCount;
 import cn.alectang.user.entity.UserData;
 import cn.alectang.user.service.IUserDataService;
+import cn.alectang.user.vo.SearchUser;
 import cn.alectang.user.vo.UserInfoVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -71,6 +72,13 @@ public class UserDataController {
     public R getUserCountByUid(@PathVariable(name = "uid") String uid){
         UserCount userCount=userDataService.getUserCountByUid(uid);
         return R.ok().data("userCount",userCount);
+    }
+
+    @ApiOperation(value = "搜索用户")
+    @GetMapping("/getUserCount/{userStr}/{current}")
+    public R  searchUserList(@PathVariable("userStr") String userStr, @PathVariable("current") int current){
+        Map<String,Object> map = userDataService.searchUserList(userStr,current);
+        return R.ok().data(map);
     }
 
 

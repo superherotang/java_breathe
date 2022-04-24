@@ -27,4 +27,6 @@ public class CommunityAnnouncementServiceImpl extends ServiceImpl<CommunityAnnou
         List<CommunityAnnouncementSimple> announcement= baseMapper.getCommunityAnnouncement(cid);
         return announcement;
     }
+
+
 }

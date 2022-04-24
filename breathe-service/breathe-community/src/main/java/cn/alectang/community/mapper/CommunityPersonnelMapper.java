@@ -1,8 +1,12 @@
 package cn.alectang.community.mapper;
 
 import cn.alectang.community.entity.CommunityPersonnel;
+import cn.alectang.community.vo.MyComment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +18,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface CommunityPersonnelMapper extends BaseMapper<CommunityPersonnel> {
-
+    List<MyComment> getMyComment(@Param("uid") String uid);
 }

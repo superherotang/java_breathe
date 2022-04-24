@@ -29,4 +29,6 @@ public interface IUserDataService extends IService<UserData> {
 
 
     Map<String,Object> getUserNameByUid(Long uid);
+
+    Map<String, Object> searchUserList(String userStr,int current);
 }

@@ -62,6 +62,14 @@ public interface MinioService {
     String putObject( MultipartFile multipartFile, String bucketName);
 
     /**
+     * 文件上传
+     *
+     * @param multipartFile
+     * @param bucketName
+     */
+    String putListObject( MultipartFile multipartFile,MultipartFile[] files, String bucketName);
+
+    /**
      * 文件流下载
      * @param bucketName
      * @param objectName

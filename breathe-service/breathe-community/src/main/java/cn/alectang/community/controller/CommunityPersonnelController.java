@@ -3,11 +3,13 @@ package cn.alectang.community.controller;
 import cn.alectang.common.utils.R;
 import cn.alectang.community.entity.CommunityPersonnel;
 import cn.alectang.community.service.ICommunityPersonnelService;
+import cn.alectang.community.vo.MyComment;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -48,5 +50,12 @@ public class CommunityPersonnelController {
     public R outCommunity(@PathVariable("cid") Long cid,@PathVariable("uid") Long uid){
         communityPersonnelService.outCommunity(cid,uid);
         return  R.ok();
+    }
+
+    @ApiOperation(value = "根据uid获取社区")
+    @GetMapping("/getCommunityByUid/{uid}")
+    public R getCommunityByUid(@PathVariable("uid") String uid){
+        List<MyComment> myComments=communityPersonnelService.getCommunityByUid(uid);
+        return  R.ok().data("myComments",myComments);
     }
 }

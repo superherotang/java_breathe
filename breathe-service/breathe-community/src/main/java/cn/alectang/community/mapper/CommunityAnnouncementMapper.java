@@ -19,4 +19,6 @@ import java.util.List;
 @Mapper
 public interface CommunityAnnouncementMapper extends BaseMapper<CommunityAnnouncement> {
     List<CommunityAnnouncementSimple> getCommunityAnnouncement(@Param("cid") String cid);
+
+
 }

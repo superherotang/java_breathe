@@ -6,10 +6,12 @@ import cn.alectang.user.entity.UserCount;
 import cn.alectang.user.entity.UserData;
 import cn.alectang.user.mapper.UserDataMapper;
 import cn.alectang.user.service.IUserDataService;
+import cn.alectang.user.vo.SearchUser;
 import cn.alectang.user.vo.UserInfoVo;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -95,6 +97,25 @@ public class UserDataServiceImpl extends ServiceImpl<UserDataMapper, UserData> i
         if (userData==null){
             throw new BreatheException(20001,"找不到该用户");
         }
+        return map;
+    }
+
+    @Override
+    public Map<String, Object> searchUserList(String userStr,int c) {
+        Page<SearchUser> page = new Page<>(c, 10);
+        baseMapper.searchUserListPage(page,userStr);
+        HashMap<String, Object> map = new HashMap<>();
+        List<SearchUser> communityList = page.getRecords();
+        long current = page.getCurrent();
+        long pages = page.getPages();
+        long size = page.getSize();
+        long total = page.getTotal();
+
+        map.put("items", communityList);
+        map.put("current", current);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
         return map;
     }
 

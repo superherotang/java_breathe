@@ -4,10 +4,13 @@ import cn.alectang.common.exceptionhandler.BreatheException;
 import cn.alectang.community.entity.CommunityPersonnel;
 import cn.alectang.community.mapper.CommunityPersonnelMapper;
 import cn.alectang.community.service.ICommunityPersonnelService;
+import cn.alectang.community.vo.MyComment;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -70,5 +73,11 @@ public class CommunityPersonnelServiceImpl extends ServiceImpl<CommunityPersonne
         if (rows==0){
             throw new BreatheException(20001,"退出失败请重试");
         }
+    }
+
+    @Override
+    public List<MyComment> getCommunityByUid(String uid) {
+        List<MyComment> myComment = baseMapper.getMyComment(uid);
+        return myComment;
     }
 }

@@ -17,4 +17,6 @@ import java.util.List;
 public interface ICommunityAnnouncementService extends IService<CommunityAnnouncement> {
 
     List<CommunityAnnouncementSimple> getCommunityAnnouncement(String cid);
+
+
 }

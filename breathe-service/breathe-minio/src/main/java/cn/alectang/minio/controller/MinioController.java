@@ -36,9 +36,9 @@ public class MinioController {
 
     @ApiOperation("上传文件")
     @PostMapping("/upload/{bucketName}")
-    public String uploadFile(MultipartFile file,@PathVariable("bucketName") String bucketName) {
+    public String uploadFile(@RequestPart(value = "file",required = false) MultipartFile file,@RequestPart(value = "files",required = false) MultipartFile[] files,@PathVariable("bucketName") String bucketName) {
 
-        String url = minioService.putObject(file, bucketName);
+        String url = minioService.putListObject(file,files, bucketName);
         return url;
     }
 

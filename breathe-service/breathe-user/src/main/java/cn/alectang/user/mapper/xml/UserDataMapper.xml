@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.alectang.user.mapper.UserDataMapper">
-
+    <select id="searchUserListPage" resultType="cn.alectang.user.vo.SearchUser">
+        select uid, avatar, nickname
+        from t_user_data
+        WHERE uid LIKE '%${userStr}%'
+           or nickname LIKE '%${userStr}%'
+    </select>
 </mapper>

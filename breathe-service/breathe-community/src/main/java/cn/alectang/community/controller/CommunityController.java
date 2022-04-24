@@ -51,9 +51,16 @@ public class CommunityController {
     public R getCommunityInfo(@PathVariable long id){
          Map<String,Object> map = communityService.getCommunityInfo(id);
 
-
         return  R.ok().data(map);
     }
 
+
+    @ApiOperation(value = "获取社区列表")
+    @GetMapping("/getCommunityList/{current}")
+    public R getCommunityList(@PathVariable int current){
+        Map<String,Object> map = communityService.getCommunityList(current);
+
+        return  R.ok().data(map);
+    }
 
 }

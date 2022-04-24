@@ -26,3 +26,9 @@ spring:
         max-wait: -1
         min-idle: 0
     timeout: 30000
+
+
+mybatis-plus:
+  mapper-locations: classpath:cn/alectang/user/mapper/xml/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

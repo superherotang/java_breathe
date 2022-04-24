@@ -23,4 +23,5 @@ public interface IPostsService extends IService<Posts> {
 
     Map<String, Object> getPostInfoPage(List<String> uid,List<String> cid,String type, int current);
 
+    void postLike(String pid);
 }

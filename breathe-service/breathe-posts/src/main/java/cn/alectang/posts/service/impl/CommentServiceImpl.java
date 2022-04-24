@@ -1,17 +1,21 @@
 package cn.alectang.posts.service.impl;
 
 import cn.alectang.common.exceptionhandler.BreatheException;
+import cn.alectang.common.utils.RedisUtils;
 import cn.alectang.posts.entity.Comment;
+import cn.alectang.posts.entity.PostsCount;
 import cn.alectang.posts.mapper.CommentMapper;
 import cn.alectang.posts.service.ICommentService;
 import cn.alectang.posts.vo.CommentInfo;
 import cn.alectang.posts.vo.PostsInfo;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +31,9 @@ import java.util.UUID;
  */
 @Service
 public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> implements ICommentService {
+
+    @Resource
+    private RedisUtils redisUtils;
 
     @Override
     public Map<String, Object> getCommentByPid(int c ,String pid) {
@@ -55,7 +62,14 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         comment.setUuid(uuid);
         int insert = baseMapper.insert(comment);
         if (insert==0){
-            throw  new BreatheException(20001,"评论识别");
+            throw  new BreatheException(20001,"评论失败");
         }
+
+        //添加统计
+        String  str = (String) redisUtils.get(comment.getPostsId());
+        PostsCount postsCount= JSON.parseObject(str,PostsCount.class);
+        postsCount.setComment(postsCount.getComment()+1);
+        redisUtils.set(comment.getPostsId(), JSON.toJSONString(postsCount));
+        System.out.println(str);
     }
 }

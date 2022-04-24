@@ -20,4 +20,6 @@ public interface ICommunityService extends IService<Community> {
     void updateDescription(String id, String description);
 
     Map<String,Object> getCommunityInfo(long id);
+
+    Map<String, Object> getCommunityList(int current);
 }
