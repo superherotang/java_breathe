@@ -46,7 +46,7 @@ public class CommunityPersonnelController {
     }
 
     @ApiOperation(value = "退出社区")
-    @PostMapping("/outCommunity/{cid}/{uid}")
+    @GetMapping("/outCommunity/{cid}/{uid}")
     public R outCommunity(@PathVariable("cid") Long cid,@PathVariable("uid") Long uid){
         communityPersonnelService.outCommunity(cid,uid);
         return  R.ok();
@@ -57,5 +57,13 @@ public class CommunityPersonnelController {
     public R getCommunityByUid(@PathVariable("uid") String uid){
         List<MyComment> myComments=communityPersonnelService.getCommunityByUid(uid);
         return  R.ok().data("myComments",myComments);
+    }
+
+
+    @ApiOperation(value = "判断用户是否加入社区")
+    @GetMapping("/isAdd/{cid}/{uid}")
+    public R isAdd(@PathVariable("cid") String cid, @PathVariable("uid") String uid){
+        boolean flag = communityPersonnelService.isAdd(cid,uid);
+        return  R.ok().data("flag",flag);
     }
 }

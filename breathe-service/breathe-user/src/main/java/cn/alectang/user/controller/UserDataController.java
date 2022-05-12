@@ -62,7 +62,7 @@ public class UserDataController {
 
     @ApiOperation(value = "更新用户信息")
     @PostMapping("/updateUserData")
-    public R updateUserInfoByUid(@RequestBody UserData userData){
+    public R updateUserInfoByUid(UserData userData){
         userDataService.updateUserInfoByUid(userData);
         return R.ok();
     }

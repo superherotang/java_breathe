@@ -23,4 +23,5 @@ public interface IUserService extends IService<User> {
 
     void setPwd(String uid,String password);
 
+    void changeStates(String uid, String states);
 }

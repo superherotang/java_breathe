@@ -23,4 +23,6 @@ public interface ICommunityPersonnelService extends IService<CommunityPersonnel>
     void outCommunity(Long cid, Long uid);
 
     List<MyComment> getCommunityByUid(String uid);
+
+    boolean isAdd(String cid, String uid);
 }

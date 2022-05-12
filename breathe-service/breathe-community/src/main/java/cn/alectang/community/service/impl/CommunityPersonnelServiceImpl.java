@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author alectang
@@ -25,35 +25,37 @@ public class CommunityPersonnelServiceImpl extends ServiceImpl<CommunityPersonne
 
     /**
      * 加入社区
+     *
      * @param communityPersonnel
      */
     @Override
     public void addCommunity(CommunityPersonnel communityPersonnel) {
-        QueryWrapper<CommunityPersonnel> queryWrapper=new QueryWrapper<>();
-        queryWrapper.eq("community_id",communityPersonnel.getCommunityId());
-        queryWrapper.eq("uid",communityPersonnel.getUid());
+        QueryWrapper<CommunityPersonnel> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("community_id", communityPersonnel.getCommunityId());
+        queryWrapper.eq("uid", communityPersonnel.getUid());
         Long count = baseMapper.selectCount(queryWrapper);
-        if (count!=0){
-            throw new BreatheException(20001,"您已加入该社区");
+        if (count != 0) {
+            throw new BreatheException(20001, "您已加入该社区");
         }
         baseMapper.insert(communityPersonnel);
     }
 
     /**
      * 更新社区管理员
+     *
      * @param communityPersonnel
      * @param admin
      */
     @Override
-    public void updateAdmin(CommunityPersonnel communityPersonnel,Long admin) {
+    public void updateAdmin(CommunityPersonnel communityPersonnel, Long admin) {
         //任命管理员
-        UpdateWrapper<CommunityPersonnel> updateWrapperToUser=new UpdateWrapper<>();
+        UpdateWrapper<CommunityPersonnel> updateWrapperToUser = new UpdateWrapper<>();
         updateWrapperToUser.eq("uid", communityPersonnel.getUid());
         updateWrapperToUser.set("user_type", 0);
         baseMapper.update(null, updateWrapperToUser);
 
         //去除管理员
-        UpdateWrapper<CommunityPersonnel> updateWrapperToAdmin=new UpdateWrapper<>();
+        UpdateWrapper<CommunityPersonnel> updateWrapperToAdmin = new UpdateWrapper<>();
         updateWrapperToAdmin.eq("uid", admin);
         updateWrapperToAdmin.set("user_type", 2);
         baseMapper.update(null, updateWrapperToAdmin);
@@ -61,17 +63,18 @@ public class CommunityPersonnelServiceImpl extends ServiceImpl<CommunityPersonne
 
     /**
      * 退出社区
+     *
      * @param cid
      * @param uid
      */
     @Override
     public void outCommunity(Long cid, Long uid) {
         QueryWrapper wrapper = new QueryWrapper();
-        wrapper.eq("community_id",cid);
-        wrapper.eq("uid",uid);
+        wrapper.eq("community_id", cid);
+        wrapper.eq("uid", uid);
         int rows = baseMapper.delete(wrapper);
-        if (rows==0){
-            throw new BreatheException(20001,"退出失败请重试");
+        if (rows == 0) {
+            throw new BreatheException(20001, "退出失败请重试");
         }
     }
 
@@ -79,5 +82,23 @@ public class CommunityPersonnelServiceImpl extends ServiceImpl<CommunityPersonne
     public List<MyComment> getCommunityByUid(String uid) {
         List<MyComment> myComment = baseMapper.getMyComment(uid);
         return myComment;
+    }
+
+    /***
+     * 判断用户是否加入该社区
+     * @param cid
+     * @param uid
+     */
+    @Override
+    public boolean isAdd(String cid, String uid) {
+        QueryWrapper<CommunityPersonnel> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("community_id", cid);
+        queryWrapper.eq("uid", uid);
+        Long count = baseMapper.selectCount(queryWrapper);
+        if (count > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -149,4 +149,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         updateWrapper.set("password", encryptPwd);
         baseMapper.update(null, updateWrapper);
     }
+
+    /***
+     * 更新状态
+     * @param uid
+     * @param states
+     */
+    @Override
+    public void changeStates(String uid, String states) {
+        UpdateWrapper<User> userUpdate=new UpdateWrapper<>();
+        userUpdate.eq("uid",uid).set("status",states);
+        baseMapper.update(null,userUpdate);
+    }
 }

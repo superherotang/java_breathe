@@ -58,7 +58,12 @@ public class UserController {
         return  R.ok();
     }
 
-
+    @ApiOperation(value = "更新用户状态")
+    @GetMapping("/changeStates/{uid}/{states}")
+    public R changeStates(@PathVariable("uid") String uid,@PathVariable("states") String states){
+        userService.changeStates(uid,states);
+        return  R.ok();
+    }
 
 
 }
